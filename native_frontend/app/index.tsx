@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux'
 import { setCatoulogueMode, useAppDispatch, useAppSelector } from './redux/slice';
 import { Provider } from 'react-redux';
 import Catoulogue from '@/components/Viewcomponent/Catoulogue';
+import FixHeader from '@/components/Viewcomponent/FixHeader';
 // import Category from '@/components/Category'
 const Index = () => {
   const dispatch = useAppDispatch();
@@ -37,69 +38,11 @@ const Index = () => {
 
 
 
-          <View style={styles.topHeader}>
-            <Text style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 2, marginRight: 2 }}>
-              Blinkit in
-
-
-
-            </Text>
-            <Pressable onPress={()=>dispatch(setCatoulogueMode())}>
-              <Text>Togglke</Text>
-
-            </Pressable>
-            <View style={styles.subtopHeader}>
-              <View style={{ flexDirection: 'column' }}>
-                <Text style={{ fontSize: 30, fontWeight: 'bold', marginLeft: 2, marginRight: 2 }}>8 minutes</Text>
-                <Text>Panchsheel Nagar , Thane West</Text>
-
-              </View>
-
-              <View style={{ flexDirection: 'row', gap: 5, marginTop: 10 }}>
-                <View style={{ flexDirection: 'row', gap: 10, backgroundColor: 'gray', padding: 10, borderRadius: 50 }}>
-                  <Pressable onPress={() => router.push('/wallet')}>
-                    <Icon
-                      name="wallet"
-                      size={30}
-                      color="#c9cb33"
-                      style={{ rounded: 10 }}
-
-                    />
-                  </Pressable>
-                </View>
-                <View style={{ flexDirection: 'row', gap: 5, backgroundColor: 'gray', padding: 10, borderRadius: 50 }}>
-                  <Pressable onPress={() => router.push('/testing')}>
-                    <Icon
-                      name="user-alt"
-                      size={30}
-                      color="black"
-
-                    />
-                  </Pressable>
-                </View>
-
-
-
-              </View>
-
-
-
-            </View>
-          </View>
-          {CatoulogueMode ? <View><Catoulogue /></View> : null}
-          <View>
-            <TextInput placeholder='Search' style={{ borderWidth: 2, margin: 5 }} />
-
-          </View>
-
-          <Category />
+             {CatoulogueMode ? <View><Catoulogue /></View> : null}
 
 
 
 
-          <ScrollView>
-            <AllProducts />
-          </ScrollView>
 
           <View className='absolute bottom-0'>
             <BottomIcons/>

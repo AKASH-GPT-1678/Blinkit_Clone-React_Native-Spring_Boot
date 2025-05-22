@@ -1,45 +1,27 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Catoulogue from '@/components/Viewcomponent/Catoulogue'
-import BottomIcons from '@/components/Viewcomponent/BottomIcons'
-import { FlatList } from 'react-native'
-import { ScrollView } from 'react-native'
-import OrderAgain from '@/components/Viewcomponent/OrderAgain'
-import CategoryMap from '@/components/Viewcomponent/CategoryMap'
-import PrintCompo from '@/components/Viewcomponent/PrintCompo'
-import ReuseProductView from '@/components/Viewcomponent/reuseproductview'
-import { Stack } from 'expo-router'
-const Testing = () => {
-  const KeyUrl = 'https://storage.googleapis.com/management_324/MyImages/chilli.png';
+import { Image } from 'react-native'
+
+
+interface Props {
+  category: string
+};
+type Product = {
+  id: number;
+  name: string;
+  image: string;
+  quantity: string;
+  rating: number;
+  deliveryTime: string;
+  price: number;
+  recipe?: string;
+};
 
 
 
+export default function OrderAgain({ category }: Props) {
 
-  const items = [
-    { id: 1, name: "Masala & Spices", image: "https://storage.googleapis.com/management_324/MyImages/chilli.png" },
-    { id: 2, name: "Sweets & Snacks", image: "https://storage.googleapis.com/management_324/MyImages/chilli.png" },
-    { id: 3, name: "Chilli & Peppers", image: "https://storage.googleapis.com/management_324/MyImages/chilli.png" },
-    { id: 4, name: "Frozen Foods", image: "https://storage.googleapis.com/management_324/MyImages/chilli.png" },
-    { id: 5, name: "Meat & Poultry", image: "https://storage.googleapis.com/management_324/MyImages/chilli.png" },
-    { id: 7, name: "All Items", image: "https://storage.googleapis.com/management_324/MyImages/chilli.png" },
-    { id: 8, name: "Atta & Flour", image: "https://storage.googleapis.com/management_324/MyImages/chilli.png" },
-    { id: 9, name: "Dairy Products", image: "https://storage.googleapis.com/management_324/MyImages/chilli.png" }
-  ];
-
-
-  const items2 = [
-    { id: 1, name: "Classic Salted Chips", image: "https://storage.googleapis.com/management_324/MyImages/potato.png" },
-    { id: 2, name: "Spicy Potato Wafers", image: "https://storage.googleapis.com/management_324/MyImages/potato.png" },
-    { id: 3, name: "Tangy Tomato Crisps", image: "https://storage.googleapis.com/management_324/MyImages/potato.png" },
-    { id: 4, name: "Creamy Cheese Bites", image: "https://storage.googleapis.com/management_324/MyImages/potato.png" },
-    { id: 5, name: "Herb & Garlic Fries", image: "https://storage.googleapis.com/management_324/MyImages/potato.png" },
-    { id: 6, name: "Crunchy Snack Mix", image: "https://storage.googleapis.com/management_324/MyImages/potato.png" },
-    { id: 7, name: "Sweet Chilli Twists", image: "https://storage.googleapis.com/management_324/MyImages/potato.png" },
-    { id: 8, name: "Barbeque Potato Pop", image: "https://storage.googleapis.com/management_324/MyImages/potato.png" },
-    { id: 9, name: "Classic Cola Drink", image: "https://storage.googleapis.com/management_324/MyImages/potato.png" },
-    { id: 10, name: "Lemon Soda Splash", image: "https://storage.googleapis.com/management_324/MyImages/potato.png" }
-  ];
-    const products = [
+  const products = [
     { id: 1, name: "Amul Full Cream Milk", image: "https://storage.googleapis.com/management_324/MyImages/potato.png", quantity: "1 Litre", rating: 4.5, deliveryTime: "1 day", price: 110 },
     { id: 2, name: "Tata Salt Iodized", image: "https://storage.googleapis.com/management_324/MyImages/potato.png", quantity: "1 kg", rating: 4.7, deliveryTime: "2 days", price: 120 },
     { id: 3, name: "Aashirvaad Atta", image: "https://storage.googleapis.com/management_324/MyImages/potato.png", quantity: "5 kg", rating: 4.6, deliveryTime: "1 day", price: 240 },
@@ -62,36 +44,47 @@ const Testing = () => {
     { id: 20, name: "Tomato", image: "https://storage.googleapis.com/management_324/MyImages/potato.png", quantity: "1 kg", rating: 4.4, deliveryTime: "Same Day", price: 100, recipe: "Tomato Curry, Rasam, Tomato Chutney" }
   ];
 
-
-
-
-
-
-
-
   return (
-    <>
-    <Stack.Screen options={{ headerShown: false }} />
     <View>
 
+      <Text>{category}</Text>
 
-      {/* <BottomIcons />
-      <OrderAgain category='Grocery & Kitchens' /> */}
-      {/* <Catoulogue /> */}
-      <CategoryMap data={items} slice={3} category='Grocery & Kitchens'/>
-  
+      <FlatList
+        data={products}
+        numColumns={3}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <View className='flex flex-row gap-5 w-[130px]  p-1' key={item.id}>
+            <View className='flex flex-col w-[120px] h-[200px] bg-orange-100 mx-2 mt-4 ml-2 '>
+              <Image
+                source={{ uri: item.image }}
+                className='h-[100px] w-[120px] mt-1 mb-1 rounded-xl relative'
+                resizeMode='cover'
+              />
+              <Pressable className='text-sm font-semibold p-1 w-[50%] absolute top-24 right-0 border-2 border-green-600'>
+                <Text className='font-extrabold text-green-600 ml-3'>ADD</Text>
+              </Pressable>
 
+              <View className='flex flex-col text-sm ml-2'>
+                <Text className='text-sm'>{item.quantity}</Text>
+                <Text className='text-sm'>{item.name}</Text>
+                <Text className='text-sm'>{item.deliveryTime}</Text>
+                <Text className='text-sm'>{item.price}</Text>
+              </View>
+            </View>
+          </View>
 
+        )}
 
-
-
+        ListFooterComponent={() => <View style={{ height: 100 }} />}
+      />
 
 
     </View>
-    </>
-  )
-}
+  );
+};
 
-export default Testing
+const styles = StyleSheet.create({});
 
-const styles = StyleSheet.create({})
+
+

@@ -8,6 +8,7 @@ import { Slot } from 'expo-router';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import FixHeader from '@/components/Viewcomponent/FixHeader';
 import './global.css';
 
 export default function RootLayout() {
@@ -24,7 +25,9 @@ export default function RootLayout() {
     <Provider store={store}>
       <ClerkProvider tokenCache={tokenCache}>
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <FixHeader/>
           <Stack>
+          
             <Slot />
           </Stack>
           <StatusBar style="auto" />

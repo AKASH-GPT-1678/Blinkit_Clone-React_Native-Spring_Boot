@@ -1,90 +1,97 @@
-import { StyleSheet, Text, View, Pressable, TouchableOpacity, ScrollViewBase } from 'react-native'
-import React, { use } from 'react'
-import { setUserData, useAppDispatch, useAppSelector } from '@/app/redux/slice'
+import { StyleSheet, Text, View, Pressable, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { setUserData, useAppDispatch, useAppSelector } from '@/app/redux/slice';
 import { setactiveCategory } from '@/app/redux/slice';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-//@ts-ignore
-import Icon from 'react-native-vector-icons/Entypo';
-//@ts-ignore
-import Icon1 from 'react-native-vector-icons/Ionicons';
-//@ts-ignore
-import Icon2 from 'react-native-vector-icons/MaterialIcons';
-//@ts-ignore
-import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons';
-//@ts-ignore
-import Icon4 from 'react-native-vector-icons/FontAwesome';
-//@ts-ignore
-import Icon5 from 'react-native-vector-icons/AntDesign';
+import { Redirect, router } from 'expo-router';
+// ✅ Use Expo Vector Icons
+import { Entypo, Ionicons, MaterialIcons, MaterialCommunityIcons, FontAwesome, AntDesign } from '@expo/vector-icons';
+import { ScrollView } from 'react-native';
+enum names {
+  summer = 'summer',
+  electronics = 'electronics',
+  beauty = 'beauty',
+  decor = 'decor',
+  kids = 'kids',
+  gifts = 'gifts',
+  premium = 'premium',
 
+
+
+}
 export default function Category() {
+  const dispatch = useAppDispatch();
+  const selected = useAppSelector((state) => state.usersave.activeCategory);
+  const user = useAppSelector((state) => state.usersave.name);
 
-    const dispatch = useAppDispatch();
-    const selected = useAppSelector((state => state.usersave.activeCategory));
-    const user = useAppSelector((state => state.usersave.name));
+  const handleClick = (category: names) => {
+    dispatch(setactiveCategory(category));
+    router.push(`/(maps)/${category}`);
+  };
 
-    return (
-
-        <Provider store={store}>
-        <View>
-
-            <View>
-                <Text>Category</Text>
-                <Text>Category</Text>
-            </View>
-
-            <View style={{ flexDirection: 'row' , alignItems:'center',justifyContent : 'center' , gap : 30 , overflowX: 'scroll'}}>
-          
-
-                <TouchableOpacity style={{padding : 5 , justifyContent : 'center'}} onPress={() => dispatch(setactiveCategory('All'))}>
-
- 
-                    <Icon name="shopping-basket" size={40} color="black" />
-                    <Text>All</Text>
-          
-                </TouchableOpacity>
-          
-                    <Pressable   onPress={() => dispatch(setactiveCategory('Summer'))}>
-                    <Icon1 name="partly-sunny" size={40} color="black" />
-                    <Text>Summer</Text>
-                    </Pressable>
-              
-                <TouchableOpacity onPress={() => dispatch(setactiveCategory('Electric'))}>
-                    <Icon2 name="electric-bolt" size={40} color="black" />
-                    <Text>Electric</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => dispatch(setactiveCategory('Beauty'))}>
-                    <Icon name="sweden" size={40} color="black" />
-                    <Text>Beauty</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => dispatch(setactiveCategory('Decor'))}>
-                    <Icon3 name="lamp" size={40} color="black" />
-                    <Text>Decor</Text>
-                </TouchableOpacity>
-                 <TouchableOpacity onPress={() => dispatch(setactiveCategory('Kids'))}>
-                    <Icon2 name="child-care" size={40} color="black" />
-                    <Text>Kids</Text>
-                </TouchableOpacity>
-                    <TouchableOpacity onPress={() => dispatch(setactiveCategory('Gift'))}>
-                    <Icon5 name="gift" size={40} color="black" />
-                    <Text>Gift</Text>
-                </TouchableOpacity>
-                    <TouchableOpacity onPress={() => dispatch(setactiveCategory('Premium'))}>
-                    <Icon4 name="diamond" size={40} color="black" />
-                    <Text>Premium</Text>
-                </TouchableOpacity>
-              
-              
-
-            </View>
-          
+  return (
+    <Provider store={store}>
+      <View>
 
 
 
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 25,
+          overflowX: 'scroll',
+          cursor: 'pointer',
+        }
 
-        </View>
-        </Provider>
-    )
+        }>
+          <TouchableOpacity
+            style={{ padding: 5, justifyContent: 'center' }}
+            onPress={() => dispatch(setactiveCategory('All'))}
+          >
+            <Entypo name="shopping-basket" size={40} color="black" style={{ cursor: 'pointer' }} />
+            <Text>All</Text>
+          </TouchableOpacity>
+
+          <Pressable onPress={() => handleClick(names.summer)}>
+            <Ionicons name="partly-sunny" size={40} color="black" />
+            <Text>Summer</Text>
+          </Pressable>
+
+          <TouchableOpacity onPress={() => handleClick(names.electronics)}>
+            <MaterialIcons name="electric-bolt" size={40} color="black" />
+            <Text>Electric</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => handleClick(names.beauty)}>
+            <Entypo name="sweden" size={40} color="black" />
+            <Text>Beauty</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() =>handleClick(names.decor)}>
+            <MaterialCommunityIcons name="lamp" size={40} color="black" />
+            <Text>Decor</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleClick(names.kids)}>
+            <MaterialIcons name="child-care" size={40} color="black" />
+            <Text>Kids</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => handleClick(names.gifts)}>
+            <AntDesign name="gift" size={40} color="black" />
+            <Text>Gift</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => handleClick(names.premium)}>
+            <FontAwesome name="diamond" size={40} color="black" />
+            <Text>Premium</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
+
+    </Provider>
+  );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
