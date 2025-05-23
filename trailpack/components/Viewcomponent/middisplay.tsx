@@ -25,13 +25,13 @@ export default function MidDisplay({ heading, data, bgColor }: Crops) {
 
                         <View className='flex flex-row gap-10' key={index}>
                               <View>
-                        <View className='flex flex-col m-2 bg-yellow-200 backdrop-brightness-200 items-center justify-center  rounded-2xl' style={{width: 120 , height : 100}}>
+                        <View className={`flex flex-col m-2 ${bgColor} backdrop-brightness-200 items-center justify-center  rounded-2xl`} style={{width: 120 , height : 100}}>
                          <Image source={{uri : item.imageUrl}} style={{width:70, height:60}} />
                             
                           
                                 
                             </View>
-                               <Text className='text-sm'>{item.title}</Text>
+                               <Text className='text-sm w-[100px] ml-5'>{item.title}</Text>
                          </View>
                       
                          </View>

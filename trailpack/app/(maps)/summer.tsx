@@ -33,7 +33,7 @@ const Summer = () => {
             <ReuseProductView data={products} slice1={3} slice2={9} heading1={'Make Your vacations more playful'} />
             <ReuseProductView data={SummerMemory} slice1={0} slice2={3} heading1={'Make Sleepovers fun and memorable'} />
 
-            <MidDisplay data={sampleProps.data} heading='Helelo' />
+            <MidDisplay data={sampleProps.data} bgColor='bg-blue-400' heading='Helelo' />
 
             <ReuseProductView data={Gardening} slice1={0} slice2={6} heading1={'The Joy of Gardening & growing'} heading2='Get plants, watering cans and more' />
 
@@ -41,8 +41,8 @@ const Summer = () => {
             <ReuseProductView data={Icecrem} slice1={0} slice2={6} heading1={'Make Sleepovers fun and memorable'} />
           </View>
           <View>
-            <View className='flex flex-col  p-3 h-[200px] mt-10
-            '>
+            <View className='flex flex-col  p-3  mt-10
+            ' style={{height: 300}}>
               <Text className='text-4xl font-semibold ' style={{fontSize : 40 , fontWeight : 'bold'}}>Blinkit india's ❤️</Text>
               <Text style={{fontSize : 40 , fontWeight : 'bold'}}>last minute app</Text>
 
