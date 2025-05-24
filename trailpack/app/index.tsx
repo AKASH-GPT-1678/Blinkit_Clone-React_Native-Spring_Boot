@@ -13,7 +13,7 @@ export default function Index() {
       <Pressable onPress={()=>router.push('/testing')} className="text-blue-500">
         <Text>Open up App.tsx to start working on your app!</Text>
       </Pressable>
-   {/* <OrderAgain category="milk" /> */}
+ 
     </View>
   );
 }

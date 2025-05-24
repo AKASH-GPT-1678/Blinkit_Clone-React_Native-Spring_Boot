@@ -39,6 +39,7 @@ export default function ReuseProductView({ data: products, slice1, slice2, headi
             <FlatList
                 data={product}
                 numColumns={3}
+              
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => (
 

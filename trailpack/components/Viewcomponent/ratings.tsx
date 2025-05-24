@@ -16,12 +16,12 @@ export default function Ratings({rating} : Props) {
           key={i}
           name={i <  rating ? 'star' : 'star-o' }
           
-          size={10}
+          size={12}
           
           color={i < rating ? '#eac013' : undefined}
         />
       ))}
-      {/* <FontAwesome name='star-half-empty' size={10} color={'#eac013'}/> */}
+  
     </View>
   )
 }

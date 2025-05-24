@@ -3,7 +3,8 @@ import { useSharedValue } from 'react-native-reanimated'
 import React from 'react'
 
 import { Redirect, router } from 'expo-router';
-import data from '@/components/Viewcomponent/wallet.data';
+// import data from '@/components/Viewcomponent/wallet.data';
+import { data } from '@/components/Viewcomponent/wallet.data';
 import WalletRender from '@/components/walletrender';
 import { setactiveCategory, setUserData } from './redux/slice';
 // import asyncStorage from '@react-native-async-storage/async-storage';
